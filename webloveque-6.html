@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hi Cutie 🥰</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at center, #ff9ecf, #ff69b4, #ff1493);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .title-box {
+            background: #ff69b4;
+            padding: 15px 30px;
+            border-radius: 40px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 10px;
+            display: inline-block;
+            box-shadow: 0 0 20px pink;
+        }
+
+        .big-heart {
+            font-size: 120px;
+            margin: 20px 0;
+            animation: beat3d 1s infinite;
+            filter: drop-shadow(0 0 20px red);
+        }
+
+        @keyframes beat3d {
+            0% { transform: scale(1) rotateY(0deg); }
+            50% { transform: scale(1.1) rotateY(20deg); }
+            100% { transform: scale(1) rotateY(0deg); }
+        }
+
+        button {
+            padding: 18px 35px;
+            font-size: 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            max-width: 90%;
+            font-weight: bold;
+        }
+
+        .start-btn, .yes {
+            background: #ff1493;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .no {
+            background: red;
+            color: white;
+            position: fixed;
+            z-index: 999;
+            padding: 12px 25px;
+        }
+
+        .hidden { display: none; }
+
+        .name-heading {
+            background: #ff69b4;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 18px;
+            display: inline-block;
+        }
+
+        .love-input {
+            margin-top: 15px;
+            background: #ffe6f2;
+            padding: 15px;
+            border-radius: 20px;
+            display: inline-block;
+            box-shadow: 0 0 15px pink;
+        }
+
+        .love-input input {
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 15px;
+            border: 2px solid pink;
+            width: 80%;
+            outline: none;
+        }
+
+        .insta {
+            position: fixed;
+            background: #ff1493;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            text-decoration: none;
+            z-index: 2000;
+            font-weight: bold;
+        }
+        .top-left { top: 10px; left: 10px; }
+        .top-right { top: 10px; right: 10px; }
+        .bottom-left { bottom: 10px; left: 10px; }
+        .bottom-right { bottom: 10px; right: 10px; }
+
+        .name-box {
+            position: fixed;
+            top: -60px;
+            background: #ff69b4;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: bold;
+            animation: fallName linear forwards;
+            font-size: 16px;
+            box-shadow: 0 0 10px pink;
+        }
+
+        @keyframes fallName { to { transform: translateY(110vh); } }
+
+        .typing-heart {
+            position: fixed;
+            font-size: 20px;
+            animation: floatUp 1.5s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-80px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="https://instagram.com/Deepak__ff__302" target="_blank" class="insta top-left">Deepak__ff__302</a>
+    <a href="https://instagram.com/Deepak__ff__302" target="_blank" class="insta top-right">Deepak__ff__302</a>
+    <a href="https://instagram.com/Deepak__ff__302" target="_blank" class="insta bottom-left">Deepak__ff__302</a>
+    <a href="https://instagram.com/Deepak__ff__302" target="_blank" class="insta bottom-right">Deepak__ff__302</a>
+
+    <div class="container">
+        <div class="title-box">HIi Cutie 🥰</div>
+
+        <div id="firstPage">
+            <div class="big-heart">❤️</div>
+            <button class="start-btn" onclick="startApp()">Click Me 💕</button>
+        </div>
+
+        <div id="namePage" class="hidden">
+            <h2 class="name-heading">Please Enter Your Name Babu💞</h2>
+            <div class="love-input">
+                <input type="text" id="userName" placeholder="Enter Name...">
+            </div>
+            <br>
+            <button class="start-btn" onclick="saveName()">Enter</button>
+        </div>
+
+        <div id="question1" class="hidden">
+            <h2 style="color:white;">Do You Like Me?</h2>
+            <button class="yes" onclick="likeYes()">Yes</button>
+            <button class="no" id="no1">No</button>
+        </div>
+
+        <div id="question2" class="hidden">
+            <h2 style="color:white;">Do You Love Me?</h2>
+            <button class="yes" onclick="loveYes()">Ha Bilkul</button>
+            <button class="no" id="no2">Nhi To</button>
+        </div>
+
+        <div id="final" class="hidden">
+            <h2 style="color:white; font-size: 22px;">Mujhe Pehle Se He Pta Tha Pagli 😅🌹</h2>
+            <button class="start-btn" onclick="openInsta()">
+                Message Me 💌
+            </button>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop preload="auto">
+        <source src="deepaksitesong.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const music = document.getElementById("bgMusic");
+
+        // Sabse important function
+        function startApp() {
+            // "Click Me" dabaney par audio play hona hi chahiye
+            music.play().then(() => {
+                console.log("Music started!");
+            }).catch(error => {
+                console.log("Audio block: ", error);
+            });
+            
+            fireBlast();
+            document.getElementById("firstPage").classList.add("hidden");
+            document.getElementById("namePage").classList.remove("hidden");
+        }
+
+        const input = document.getElementById("userName");
+        input.addEventListener("input", function() {
+            let heart = document.createElement("div");
+            heart.className = "typing-heart";
+            heart.innerHTML = "💖";
+            heart.style.left = (Math.random() * 80 + 10) + "vw";
+            heart.style.top = "60vh";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 1500);
+        });
+
+        function fireBlast() {
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+        }
+
+        function saveName() {
+            let name = document.getElementById("userName").value;
+            if (name.trim() == "") return;
+            fireBlast();
+            document.getElementById("namePage").classList.add("hidden");
+            document.getElementById("question1").classList.remove("hidden");
+
+            setInterval(() => {
+                let box = document.createElement("div");
+                box.classList.add("name-box");
+                box.innerText = name + " 💞";
+                box.style.left = Math.random() * 80 + "vw";
+                box.style.animationDuration = (3 + Math.random() * 2) + "s";
+                document.body.appendChild(box);
+                setTimeout(() => box.remove(), 5000);
+            }, 1000);
+        }
+
+        function likeYes() {
+            fireBlast();
+            document.getElementById("question1").classList.add("hidden");
+            document.getElementById("question2").classList.remove("hidden");
+        }
+
+        function loveYes() {
+            fireBlast();
+            document.getElementById("question2").classList.add("hidden");
+            document.getElementById("final").classList.remove("hidden");
+            setInterval(() => {
+                confetti({ particleCount: 50, spread: 100, origin: { x: Math.random(), y: Math.random() - 0.2 } });
+            }, 300);
+        }
+
+        function openInsta() {
+            // Direct DM link for Instagram
+            const text = "I Love You 😘💞";
+            window.location.href = `https://ig.me/m/Deepak__ff__302?text=${encodeURIComponent(text)}`;
+        }
+
+        function moveButton(btn) {
+            let maxX = window.innerWidth - btn.offsetWidth - 20;
+            let maxY = window.innerHeight - btn.offsetHeight - 20;
+            btn.style.left = Math.random() * maxX + "px";
+            btn.style.top = Math.random() * maxY + "px";
+        }
+
+        const no1 = document.getElementById("no1");
+        const no2 = document.getElementById("no2");
+
+        no1.addEventListener("touchstart", (e) => { e.preventDefault(); moveButton(no1); });
+        no2.addEventListener("touchstart", (e) => { e.preventDefault(); moveButton(no2); });
+    </script>
+</body>
+</html>
